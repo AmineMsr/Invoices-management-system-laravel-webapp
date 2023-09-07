@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: php-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: php
+  template:
+    metadata:
+      labels:
+        app: php
+    spec:
+      containers:
+        - name: php
+          image: mrschnoock/e-facture-php
+          env:
+            - name: APP_ENV
+              value: local
+            - name: CONTAINER_ROLE
+              value: app
+            - name: MYSQL_HOST
+              value: database
+            - name: MYSQL_USERNAME
+              value: root
+            - name: MYSQL_PASSWORD
+              value: admin
+            - name: MYSQL_DB
+              value: e-facture
+          ports:
+            - containerPort: 8000
+          volumeMounts:
+            - name: app-data
+              mountPath: /var/www
+      volumes:
+        - name: app-data
+          hostPath:
+            path: C:\laragon\www\e-facture\app

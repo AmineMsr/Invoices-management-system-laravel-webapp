@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node
+  template:
+    metadata:
+      labels:
+        app: node
+    spec:
+      containers:
+        - name: node
+          image: mrschnoock/e-facture-node
+          volumeMounts:
+            - name: app-data
+              mountPath: /usr/src
+            - name: node-modules
+              mountPath: /usr/src/node_modules
+          tty: true
+          command: ["sh", "-c", "npm run dev"]
+      volumes:
+        - name: app-data
+          hostPath:
+            path: C:\laragon\www\e-facture\app
+        - name: node-modules
+          hostPath:
+            path: C:\laragon\www\e-facture\node_modules

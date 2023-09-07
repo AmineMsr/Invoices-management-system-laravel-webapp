@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo-onhym-rogné.png') }}" alt="logo-onhym" class="w-22 h-8"/>

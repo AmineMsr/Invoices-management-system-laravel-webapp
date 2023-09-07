@@ -1,0 +1,1 @@
+<img src="{{ asset('images/logo-onhym.png') }}" alt="logo-onhym" />
